@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
-import 'package:weather_app/apiservice/get_api_resp.dart';
+import 'package:weather_app/api_service/get_api_resp.dart';
 import 'package:weather_app/model/weather_data_model.dart';
 
 class GlobelController extends GetxController {

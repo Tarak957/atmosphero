@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class CustomColor {
-  static Color kblack = Colors.black;
-  static Color kwhite = Colors.white;
-  static Color kpurple = Colors.deepPurple;
-  static Color kgrey = Colors.grey;
+  static Color black = Colors.black;
+  static Color white = Colors.white;
+  static Color purple = Colors.deepPurple;
+  static Color grey = Colors.grey;
   static const colorCard = Color(0xffE9ECF1);
   static const gradientColorOne = Color(0xff408ADE);
   static const gradientColorTwo = Color(0xff5286CD);
@@ -39,9 +39,9 @@ class CustomHeights {
 class CustomWidth {
   static commonwidth(context) {
     Size size = MediaQuery.of(context).size;
-    var height = SizedBox(
+    var width = SizedBox(
       width: size.height * 0.01,
     );
-    return height;
+    return width;
   }
 }

@@ -21,6 +21,12 @@ dependencies:
   dio: 5.3.3
   share: 2.0.4
   awesome_dialog: 2.2.1
+  flutter_launcher_icons: ^0.13.1
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/icons/weather.png"
   
 
 dev_dependencies:

@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:share/share.dart';
-import 'package:weather_app/controller/core/constant.dart';
-import 'package:weather_app/controller/getx/globel_controller.dart';
-import 'package:weather_app/view/settings/settings.dart';
+import 'package:weather_app/controller/core/constants.dart';
+import 'package:weather_app/controller/getx/global_controller.dart';
 
 class HeaderWidget extends StatefulWidget {
   const HeaderWidget({super.key});
@@ -31,48 +29,32 @@ class _HeaderWidgetState extends State<HeaderWidget> {
     return Column(
       children: [
         CustomHeights.minHeight(context),
+        CustomHeights.minHeight(context),
         SizedBox(
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              IconButton(
-                  onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const Settings(),
-                    ));
-                  },
-                  icon: const Icon(Icons.settings)),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.location_on,
-                    color: CustomColor.kpurple,
-                    size: 30,
-                  ),
-                  CustomWidth.commonwidth(context),
-                  Text(
-                    city,
-                    style: CustomFuction.textStyleFuction(
-                      size: 23,
-                      fontWeight: FontWeight.bold,
-                      color: CustomColor.kpurple,
-                    ),
-                  ),
-                ],
+              Icon(
+                Icons.location_on,
+                color: CustomColor.black,
+                size: 30,
               ),
-              IconButton(
-                  onPressed: () async {
-                    await share();
-                  },
-                  icon: const Icon(Icons.share))
+              CustomWidth.commonwidth(context),
+              Text(
+                city,
+                style: CustomFuction.textStyleFuction(
+                  size: 23,
+                  fontWeight: FontWeight.bold,
+                  color: CustomColor.black,
+                ),
+              ),
             ],
           ),
         ),
         Text(
           DateFormat.yMMMMEEEEd().format(dateTime),
           style: CustomFuction.textStyleFuction(
-              size: 14, fontWeight: FontWeight.w500, color: CustomColor.kblack),
+              size: 14, fontWeight: FontWeight.w500, color: CustomColor.black),
         ),
       ],
     );
@@ -84,9 +66,5 @@ class _HeaderWidgetState extends State<HeaderWidget> {
     setState(() {
       city = place.locality!;
     });
-  }
-
-  Future<void> share() async {
-    await Share.share('https://www.amazon.com/gp/product/B0CLKVWV3Q');
   }
 }

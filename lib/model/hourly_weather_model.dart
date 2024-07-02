@@ -1,4 +1,4 @@
-import 'package:weather_app/model/current_weatherdata.dart';
+import 'package:weather_app/model/current_weather_data.dart';
 
 class WeatherDataHourly {
   List<HourlyModel> hourlyModel;

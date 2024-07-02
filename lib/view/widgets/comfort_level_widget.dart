@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
-import 'package:weather_app/controller/core/constant.dart';
-import 'package:weather_app/model/current_weatherdata.dart';
+import 'package:weather_app/controller/core/constants.dart';
+import 'package:weather_app/model/current_weather_data.dart';
 
 class ComfortLevelWidget extends StatelessWidget {
-  const ComfortLevelWidget({super.key, required this.currentWeatherData});
   final CurrentWeatherData currentWeatherData;
+  const ComfortLevelWidget({
+    super.key,
+    required this.currentWeatherData,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -30,19 +33,20 @@ class ComfortLevelWidget extends StatelessWidget {
             infoProperties: InfoProperties(
               bottomLabelText: "Humidity",
               bottomLabelStyle: TextStyle(
-                  color: CustomColor.kblack,
+                  color: CustomColor.black,
                   fontSize: 14,
                   fontWeight: FontWeight.w600,
                   letterSpacing: 0.1,
                   height: 1.8),
             ),
             customColors: CustomSliderColors(
-                hideShadow: true,
-                trackColor: CustomColor.gradientColorOne.withAlpha(80),
-                progressBarColors: [
-                  CustomColor.gradientColorOne,
-                  CustomColor.gradientColorTwo,
-                ]),
+              hideShadow: true,
+              trackColor: CustomColor.gradientColorOne.withAlpha(80),
+              progressBarColors: [
+                CustomColor.gradientColorOne,
+                CustomColor.gradientColorTwo,
+              ],
+            ),
           ),
         ),
         Row(
@@ -53,7 +57,7 @@ class ComfortLevelWidget extends StatelessWidget {
               style: CustomFuction.textStyleFuction(
                   size: 15,
                   fontWeight: FontWeight.w500,
-                  color: CustomColor.kblack),
+                  color: CustomColor.black),
             ),
             Container(color: CustomColor.dividerLine, height: 20, width: 2),
             Text(
@@ -61,10 +65,11 @@ class ComfortLevelWidget extends StatelessWidget {
               style: CustomFuction.textStyleFuction(
                   size: 15,
                   fontWeight: FontWeight.w500,
-                  color: CustomColor.kblack),
+                  color: CustomColor.black),
             )
           ],
-        )
+        ),
+        const SizedBox(height: 20)
       ],
     );
   }

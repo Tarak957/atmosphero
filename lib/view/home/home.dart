@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:weather_app/controller/core/constant.dart';
-import 'package:weather_app/controller/getx/globel_controller.dart';
+import 'package:weather_app/controller/core/constants.dart';
+import 'package:weather_app/controller/getx/global_controller.dart';
 import 'package:weather_app/view/widgets/comfort_level_widget.dart';
 import 'package:weather_app/view/widgets/current_weather_widget.dart';
 import 'package:weather_app/view/widgets/daily_weather.dart';
@@ -15,63 +15,71 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
-    final GlobelController controller =
+    final GlobelController globalController =
         Get.put(GlobelController(), permanent: true);
 
     return Stack(
       children: [
         RefreshIndicator(
           onRefresh: () async {
-            controller.isLoading.value = true;
-            controller.onInit();
+            globalController.isLoading.value = true;
+            globalController.onInit();
           },
           child: Scaffold(
-            body: Obx(() => (controller.checkLoading().isTrue)
-                ? Center(child: loading())
-                : SingleChildScrollView(
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        gradient: LinearGradient(
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
+            body: Obx(
+              () => (globalController.checkLoading().isTrue)
+                  ? Center(child: loading())
+                  : SingleChildScrollView(
+                      child: Container(
+                        decoration: const BoxDecoration(
+                          gradient: LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
                             colors: [
-                              Color.fromARGB(255, 140, 175, 203),
-                              Colors.white10
-                            ]),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Column(
-                          children: [
-                            CustomHeights.commonHeight(context),
-                            const HeaderWidget(),
-                            CustomHeights.commonHeight(context),
-                            CurrentWeatherWidget(
-                              currentWeatherData:
-                                  controller.getData().getCurrentWeather(),
-                              screenSize: screenSize,
-                            ),
-                            CustomHeights.commonHeight(context),
-                            WethersHourly(
-                              weatherDataHourly:
-                                  controller.getData().getHourlyWeather(),
-                              screenSize: screenSize,
-                            ),
-                            CustomHeights.commonHeight(context),
-                            DailyWeather(
-                              weatherDataDaily:
-                                  controller.getData().getDailyWeather(),
-                              screenSize: screenSize,
-                            ),
-                            ComfortLevelWidget(
-                              currentWeatherData:
-                                  controller.getData().getCurrentWeather(),
-                            )
-                          ],
+                              Color(0xFF55ADF6),
+                              Color(0x1AF2EEEE),
+                              Color(0xFF85C5F9),
+                            ],
+                          ),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Column(
+                            children: [
+                              CustomHeights.commonHeight(context),
+                              const HeaderWidget(),
+                              CustomHeights.commonHeight(context),
+                              CurrentWeatherWidget(
+                                currentWeatherData: globalController
+                                    .getData()
+                                    .getCurrentWeather(),
+                                screenSize: screenSize,
+                              ),
+                              CustomHeights.commonHeight(context),
+                              WethersHourly(
+                                weatherDataHourly: globalController
+                                    .getData()
+                                    .getHourlyWeather(),
+                                screenSize: screenSize,
+                              ),
+                              CustomHeights.commonHeight(context),
+                              DailyWeather(
+                                weatherDataDaily: globalController
+                                    .getData()
+                                    .getDailyWeather(),
+                                screenSize: screenSize,
+                              ),
+                              ComfortLevelWidget(
+                                currentWeatherData: globalController
+                                    .getData()
+                                    .getCurrentWeather(),
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     ),
-                  )),
+            ),
           ),
         ),
       ],

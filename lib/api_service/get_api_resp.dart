@@ -1,6 +1,6 @@
 import 'dart:developer';
-import 'package:weather_app/apiservice/string.dart';
-import 'package:weather_app/model/current_weatherdata.dart';
+import 'package:weather_app/api_service/string.dart';
+import 'package:weather_app/model/current_weather_data.dart';
 import 'package:weather_app/model/daily_weather_model.dart';
 import 'package:weather_app/model/hourly_weather_model.dart';
 import 'package:weather_app/model/weather_data_model.dart';

@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Weather App',
+      title: 'Atmosphero',
       theme: ThemeData(
         fontFamily: GoogleFonts.prompt().fontFamily,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),

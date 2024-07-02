@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:weather_app/controller/core/constant.dart';
-import 'package:weather_app/controller/getx/globel_controller.dart';
+import 'package:weather_app/controller/core/constants.dart';
+import 'package:weather_app/controller/getx/global_controller.dart';
 import 'package:weather_app/model/hourly_weather_model.dart';
 
 class WethersHourly extends StatelessWidget {
@@ -39,40 +39,38 @@ class WethersHourly extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           return Obx(
-            () => GestureDetector(
-                onTap: () {
-                  cardInd.value = index;
-                },
-                child: Container(
-                  width: screenSize.width * 0.23,
-                  margin: const EdgeInsets.only(left: 20, right: 5),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      boxShadow: [
-                        BoxShadow(
-                            offset: const Offset(
-                              0.5,
-                              0,
-                            ),
-                            blurRadius: 30,
-                            spreadRadius: 1,
-                            color: CustomColor.dividerLine.withAlpha(200)),
-                      ],
-                      gradient: cardInd.value == index
-                          ? const LinearGradient(colors: [
-                              CustomColor.gradientColorOne,
-                              CustomColor.gradientColorTwo
-                            ])
-                          : null),
-                  child: hourlyDetails(
-                      temp: weatherDataHourly.hourlyModel[index].temp!.floor(),
-                      timeStamp:
-                          weatherDataHourly.hourlyModel[index].dt!.floor(),
-                      weatherIcon: weatherDataHourly
-                          .hourlyModel[index].weather![0].icon!,
-                      index: index,
-                      cardInd: cardInd.toInt()),
-                )),
+            () => Container(
+              width: screenSize.width * 0.23,
+              margin: const EdgeInsets.only(left: 20, right: 5),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                boxShadow: [
+                  BoxShadow(
+                    offset: const Offset(
+                      0.5,
+                      0,
+                    ),
+                    blurRadius: 30,
+                    spreadRadius: 1,
+                    color: CustomColor.dividerLine.withAlpha(200),
+                  ),
+                ],
+                gradient: LinearGradient(
+                  colors: [
+                    CustomColor.grey.withOpacity(0.8),
+                    CustomColor.white,
+                  ],
+                ),
+              ),
+              child: hourlyDetails(
+                temp: weatherDataHourly.hourlyModel[index].temp!.floor(),
+                timeStamp: weatherDataHourly.hourlyModel[index].dt!.floor(),
+                weatherIcon:
+                    weatherDataHourly.hourlyModel[index].weather![0].icon!,
+                index: index,
+                cardInd: cardInd.toInt(),
+              ),
+            ),
           );
         },
         itemCount: weatherDataHourly.hourlyModel.length > 12
@@ -98,14 +96,14 @@ class WethersHourly extends StatelessWidget {
             style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.bold,
-                color:
-                    index == cardInd ? CustomColor.kwhite : CustomColor.kblack),
+                color: CustomColor.black),
           ),
         ),
         Container(
-            margin: const EdgeInsets.all(5),
-            child: Image.asset('assets/weather/$weatherIcon.png',
-                height: 40, width: 40)),
+          margin: const EdgeInsets.all(5),
+          child: Image.asset('assets/weather/$weatherIcon.png',
+              height: 40, width: 40),
+        ),
         Container(
           margin: const EdgeInsets.only(top: 10),
           child: Text(
@@ -113,8 +111,7 @@ class WethersHourly extends StatelessWidget {
             style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.bold,
-                color:
-                    index == cardInd ? CustomColor.kwhite : CustomColor.kblack),
+                color: CustomColor.black),
           ),
         ),
       ],

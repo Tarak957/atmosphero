@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/controller/core/constant.dart';
-import 'package:weather_app/model/current_weatherdata.dart';
+import 'package:weather_app/controller/core/constants.dart';
+import 'package:weather_app/model/current_weather_data.dart';
 
 class CurrentWeatherWidget extends StatelessWidget {
   const CurrentWeatherWidget(
@@ -23,7 +23,12 @@ class CurrentWeatherWidget extends StatelessWidget {
       height: screenSize.height * 0.23,
       margin: const EdgeInsets.symmetric(horizontal: 20),
       decoration: BoxDecoration(
-        color: Colors.blue.withAlpha(100),
+        gradient: LinearGradient(
+          colors: [
+            CustomColor.grey.withOpacity(0.8),
+            CustomColor.white,
+          ],
+        ),
         borderRadius: BorderRadius.circular(30),
       ),
       child: Row(
@@ -31,17 +36,13 @@ class CurrentWeatherWidget extends StatelessWidget {
         children: [
           Image.asset(
               'assets/weather/${currentWeatherData.currentModel.weather![0].icon}.png'),
-          const VerticalDivider(
-            endIndent: 5,
-            indent: 5,
-          ),
           Center(
             child: Text(
               "${currentWeatherData.currentModel.temp!.floor()}°",
               style: CustomFuction.textStyleFuction(
                   size: 80,
                   fontWeight: FontWeight.bold,
-                  color: CustomColor.kpurple.withAlpha(500)),
+                  color: CustomColor.black),
             ),
           ),
         ],
@@ -50,68 +51,84 @@ class CurrentWeatherWidget extends StatelessWidget {
   }
 
   Widget moreDetailsWidget(BuildContext context) {
-    return Column(
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        Column(
           children: [
             Container(
               height: screenSize.height * 0.07,
               width: screenSize.width * 0.15,
               padding: const EdgeInsets.all(14),
               decoration: BoxDecoration(
-                color: CustomColor.colorCard,
+                // color: CustomColor.colorCard,
+                gradient: LinearGradient(
+                  colors: [
+                    CustomColor.grey.withOpacity(0.8),
+                    CustomColor.white,
+                  ],
+                ),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Image.asset('assets/icons/windspeed.png'),
             ),
+            const SizedBox(height: 10),
+            const Text('Wind Speed'),
+            Text(
+              "${currentWeatherData.currentModel.windSpeed!.floor()} km/h",
+            ),
+          ],
+        ),
+        Column(
+          children: [
             Container(
               height: screenSize.height * 0.07,
               width: screenSize.width * 0.15,
               padding: const EdgeInsets.all(14),
               decoration: BoxDecoration(
-                color: CustomColor.colorCard,
+                // color: CustomColor.colorCard,
+                gradient: LinearGradient(
+                  colors: [
+                    CustomColor.grey.withOpacity(0.8),
+                    CustomColor.white,
+                  ],
+                ),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Image.asset('assets/icons/clouds.png'),
             ),
+            const SizedBox(height: 10),
+            const Text('Clouds'),
+            Text(
+              "${currentWeatherData.currentModel.clouds}%",
+            ),
+          ],
+        ),
+        Column(
+          children: [
             Container(
               height: screenSize.height * 0.07,
               width: screenSize.width * 0.15,
               padding: const EdgeInsets.all(14),
               decoration: BoxDecoration(
-                color: CustomColor.colorCard,
+                // color: CustomColor.colorCard,
+                gradient: LinearGradient(
+                  colors: [
+                    CustomColor.grey.withOpacity(0.8),
+                    CustomColor.white,
+                  ],
+                ),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Image.asset('assets/icons/humidity.png'),
             ),
+            const SizedBox(height: 10),
+            const Text('Humidity'),
+            Text(
+              "${currentWeatherData.currentModel.humidity}%",
+            ),
           ],
         ),
-        CustomHeights.minHeight(context),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            SizedBox(
-              height: 20,
-              width: 60,
-              child: Text(
-                  "${currentWeatherData.currentModel.windSpeed!.floor()} km/h",
-                  textAlign: TextAlign.center),
-            ),
-            SizedBox(
-              height: 20,
-              width: 60,
-              child: Text('${currentWeatherData.currentModel.clouds}%',
-                  textAlign: TextAlign.center),
-            ),
-            SizedBox(
-              height: 20,
-              width: 60,
-              child: Text('${currentWeatherData.currentModel.humidity}%',
-                  textAlign: TextAlign.center),
-            )
-          ],
-        )
       ],
     );
   }
