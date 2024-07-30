@@ -5,25 +5,83 @@ import 'package:weather_app/controller/core/constants.dart';
 import 'package:weather_app/controller/getx/global_controller.dart';
 import 'package:weather_app/model/hourly_weather_model.dart';
 
-class WethersHourly extends StatelessWidget {
-  const WethersHourly(
+class WeathersHourly extends StatefulWidget {
+  const WeathersHourly(
       {super.key, required this.weatherDataHourly, required this.screenSize});
   final WeatherDataHourly weatherDataHourly;
   final Size screenSize;
+
+  @override
+  State<WeathersHourly> createState() => _WeathersHourlyState();
+}
+
+class _WeathersHourlyState extends State<WeathersHourly> {
+  late final ScrollController _scrollController;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController = ScrollController();
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  void scrollForward() {
+    _scrollController.animateTo(
+      _scrollController.offset + 100, // Adjust the scroll amount as needed
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeInOut,
+    );
+  }
+
+  void scrollBackward() {
+    _scrollController.animateTo(
+      _scrollController.offset - 100, // Adjust the scroll amount as needed
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeInOut,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Container(
-          margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
-          alignment: Alignment.topCenter,
-          child: Text(
-            'Today',
-            style: CustomFuction.textStyleFuction(
-                size: 18, fontWeight: FontWeight.bold),
-          ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            IconButton(
+              onPressed: () {
+                scrollBackward();
+              },
+              icon: const Icon(
+                Icons.arrow_back_ios_new,
+                size: 20,
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+              alignment: Alignment.topCenter,
+              child: Text(
+                'Today',
+                style: CustomFuction.textStyleFuction(
+                    size: 18, fontWeight: FontWeight.bold),
+              ),
+            ),
+            IconButton(
+              onPressed: () {
+                scrollForward();
+              },
+              icon: const Icon(
+                Icons.arrow_forward_ios,
+                size: 20,
+              ),
+            ),
+          ],
         ),
         hourlyList()
       ],
@@ -33,14 +91,19 @@ class WethersHourly extends StatelessWidget {
   Widget hourlyList() {
     final cardInd = GlobelController().getIndex();
     return Container(
-      height: screenSize.height * 0.18,
+      color: Colors.transparent,
+      height: widget.screenSize.height * 0.18,
       padding: const EdgeInsets.only(top: 10, bottom: 10),
       child: ListView.builder(
+        controller: _scrollController,
         scrollDirection: Axis.horizontal,
+        itemCount: widget.weatherDataHourly.hourlyModel.length > 12
+            ? 12
+            : widget.weatherDataHourly.hourlyModel.length,
         itemBuilder: (context, index) {
           return Obx(
             () => Container(
-              width: screenSize.width * 0.23,
+              width: widget.screenSize.width * 0.23,
               margin: const EdgeInsets.only(left: 20, right: 5),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
@@ -63,19 +126,17 @@ class WethersHourly extends StatelessWidget {
                 ),
               ),
               child: hourlyDetails(
-                temp: weatherDataHourly.hourlyModel[index].temp!.floor(),
-                timeStamp: weatherDataHourly.hourlyModel[index].dt!.floor(),
-                weatherIcon:
-                    weatherDataHourly.hourlyModel[index].weather![0].icon!,
+                temp: widget.weatherDataHourly.hourlyModel[index].temp!.floor(),
+                timeStamp:
+                    widget.weatherDataHourly.hourlyModel[index].dt!.floor(),
+                weatherIcon: widget
+                    .weatherDataHourly.hourlyModel[index].weather![0].icon!,
                 index: index,
                 cardInd: cardInd.toInt(),
               ),
             ),
           );
         },
-        itemCount: weatherDataHourly.hourlyModel.length > 12
-            ? 12
-            : weatherDataHourly.hourlyModel.length,
       ),
     );
   }

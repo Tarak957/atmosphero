@@ -12,9 +12,9 @@ class DailyWeather extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: screenSize.height * 0.45,
+      height: screenSize.height * 0.46,
       margin: const EdgeInsets.all(20),
-      padding: const EdgeInsets.all(15),
+      padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
@@ -34,7 +34,7 @@ class DailyWeather extends StatelessWidget {
               color: CustomColor.black,
             ),
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 8),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [

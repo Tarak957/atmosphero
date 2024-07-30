@@ -56,7 +56,13 @@ class HomeScreen extends StatelessWidget {
                                 screenSize: screenSize,
                               ),
                               CustomHeights.commonHeight(context),
-                              WethersHourly(
+                              ComfortLevelWidget(
+                                currentWeatherData: globalController
+                                    .getData()
+                                    .getCurrentWeather(),
+                              ),
+                              CustomHeights.commonHeight(context),
+                              WeathersHourly(
                                 weatherDataHourly: globalController
                                     .getData()
                                     .getHourlyWeather(),
@@ -69,11 +75,6 @@ class HomeScreen extends StatelessWidget {
                                     .getDailyWeather(),
                                 screenSize: screenSize,
                               ),
-                              ComfortLevelWidget(
-                                currentWeatherData: globalController
-                                    .getData()
-                                    .getCurrentWeather(),
-                              )
                             ],
                           ),
                         ),
